@@ -57,6 +57,7 @@ public class CheeseController {
         newCheese.setCategory(cat);
         if (errors.hasErrors()) {
             model.addAttribute("title", "Add Cheese");
+            model.addAttribute("categories", categoryDao.findAll());
             return "cheese/add";
         }
 
@@ -75,7 +76,7 @@ public class CheeseController {
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
 
         for (int cheeseId : cheeseIds) {
-            
+
             cheeseDao.delete(cheeseId);
         }
 
