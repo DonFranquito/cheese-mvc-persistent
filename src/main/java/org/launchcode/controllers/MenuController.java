@@ -62,6 +62,8 @@ public class MenuController {
     @RequestMapping(value="view/{menuId}", method=RequestMethod.GET)
     public String viewMenu(Model model, @PathVariable int menuId){
         Menu menu = menuDao.findOne(menuId);
+        //I know i'm supposed to pass in the entire menu here but I did this to see if it would fix
+        //the bug. I'm going to change it back once the bug is fixed
         model.addAttribute("title", menu.getName());
         model.addAttribute("cheeses",menu.getCheeses());
         model.addAttribute("menuId",menu.getId());
