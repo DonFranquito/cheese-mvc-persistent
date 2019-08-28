@@ -1,7 +1,9 @@
 package org.launchcode.controllers;
 
+import org.hibernate.Query;
 import org.launchcode.models.Category;
 import org.launchcode.models.Cheese;
+import org.launchcode.models.Menu;
 import org.launchcode.models.data.CategoryDao;
 import org.launchcode.models.data.CheeseDao;
 import org.launchcode.models.data.MenuDao;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * Created by LaunchCode
@@ -78,6 +81,7 @@ public class CheeseController {
         for (int cheeseId : cheeseIds) {
 
             cheeseDao.delete(cheeseId);
+            
         }
 
         return "redirect:";
