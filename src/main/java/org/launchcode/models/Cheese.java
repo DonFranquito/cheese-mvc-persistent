@@ -1,5 +1,8 @@
 package org.launchcode.models;
 
+import org.launchcode.models.data.MenuDao;
+import org.springframework.beans.factory.annotation.Autowired;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -14,6 +17,8 @@ public class Cheese {
 
 
     //properties
+
+
 
     @Id
     @GeneratedValue
@@ -41,6 +46,9 @@ public class Cheese {
     }
 
     public Cheese() { }
+
+
+
 
     //getters and setters
 

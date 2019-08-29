@@ -77,13 +77,40 @@ public class CheeseController {
 
     @RequestMapping(value = "remove", method = RequestMethod.POST)
     public String processRemoveCheeseForm(@RequestParam int[] cheeseIds) {
-
         for (int cheeseId : cheeseIds) {
-
-            cheeseDao.delete(cheeseId);
-
+            try {
+                for (Menu menu: menuDao.findAll()){
+                if (menu == null){
+                    break;
+                } else{
+                    if (menu.getCheeses().size() > 0){
+                        for (Cheese cheese: menu.getCheeses()){
+                            if (cheese == null){
+                                break;
+                            } else {
+                                if (cheeseId == cheese.getId()){
+                                    menu.getCheeses().remove(cheese);
+                                    menuDao.save(menu);
+                                    if (menu.getCheeses().size() == 0){
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+                cheeseDao.delete(cheeseId);
+            } catch (Exception e){
+                //it's catching a ConcurrentModificationError
+                //which I'm not sure how to work around currently
+                //because it's happening from modifying the things i'm
+                //looping over
+                System.out.println("Something didn't work right, Sorry!");
+            } finally {
+                continue;
+            }
         }
-
         return "redirect:";
     }
 
